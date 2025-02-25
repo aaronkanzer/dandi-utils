@@ -48,11 +48,11 @@ echo "AWS credentials successfully retrieved."
 aws s3 ls s3://mgh-neuroglancer/
 
 ## Cleanup AWS CLI
-deactivate
+deactivate6
 rm -rf "$AWS_CLI_DIR"
 
 echo "Running linc_s3invsync job at $TIMESTAMP..."
 
 cargo install s3invsync
 
-s3invsync --help
+s3invsync --allow-new-nonempty s3://mgh-neuroglancer/mgh-neuroglancer/versioned-s3invsync /orcd/data/linc/001/s3lincbrain/
