@@ -1,5 +1,41 @@
 ## Setup Steps on AWS Side
 
+### Enable Versioning and Inventory Configuration Management
+
+The following is example output from `aws s3api list-bucket-inventory-configurations --bucket <bucket-name-here>`
+
+In the `OptionalFields` section, you can see the fields needed to properly handle a sync of the S3 bucket via `s3invsync`
+
+```shell
+{
+    "InventoryConfigurationList": [
+        {
+            "Destination": {
+                "S3BucketDestination": {
+                    "AccountId": "151312473579",
+                    "Bucket": "arn:aws:s3:::<bucket-name-here>",
+                    "Format": "CSV"
+                }
+            },
+            "IsEnabled": true,
+            "Id": "versioned-s3invsync",
+            "IncludedObjectVersions": "All",
+            "OptionalFields": [
+                "Size",
+                "LastModifiedDate",
+                "ETag",
+                "IsMultipartUploaded",
+                "ChecksumAlgorithm"
+            ],
+            "Schedule": {
+                "Frequency": "Daily"
+            }
+        }
+    ],
+    "IsTruncated": false
+}
+```
+
 ### Issued a new user:
 
 ```
