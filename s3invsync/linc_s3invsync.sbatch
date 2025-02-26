@@ -5,6 +5,8 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
+#SBATCH --mail-user=lincbrain@mit.edu
+#SBATCH --mail-type=BEGIN,END,FAIL
 
 TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
 
@@ -55,4 +57,4 @@ echo "Running linc_s3invsync job at $TIMESTAMP..."
 
 cargo install s3invsync
 
-s3invsync --allow-new-nonempty s3://mgh-neuroglancer/mgh-neuroglancer/versioned-s3invsync /orcd/data/linc/001/s3lincbrain/
+s3invsync --allow-new-nonempty --ok-errors all s3://linc-brain-mit-staging-us-east-2/linc-brain-mit-staging-us-east-2/staging-configuration /orcd/data/linc/001/s3lincbrain/
