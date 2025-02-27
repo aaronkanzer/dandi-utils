@@ -47,14 +47,12 @@ aws sts get-caller-identity
 
 echo "AWS credentials successfully retrieved."
 
-aws s3 ls s3://mgh-neuroglancer/
-
 ## Cleanup AWS CLI
-deactivate6
+deactivate 
 rm -rf "$AWS_CLI_DIR"
 
 echo "Running linc_s3invsync job at $TIMESTAMP..."
 
-cargo install s3invsync
+cargo install s3invsync --version 0.2.0
 
 s3invsync --allow-new-nonempty --ok-errors all s3://linc-brain-mit-staging-us-east-2/linc-brain-mit-staging-us-east-2/staging-configuration /orcd/data/linc/001/s3lincbrain/
